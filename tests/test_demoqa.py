@@ -1,18 +1,23 @@
 from selene import browser, have, be
+import allure
 
 def test_simple(setup_browser):
     browser.open('https://google.com')
     pass
 
-
+@allure.tag("allure test 1")
+@allure.label("owner", "Sergey")
+@allure.feature('Регистрация пользователя')
+@allure.story('Регистрация пользователя с заполнением всех полей')
+@allure.link("https://github.com", name='Testing')
 def test_complete_form(setup_browser, file_path):
-    browser.open('https://demoqa.com/automation-practice-form')
-    browser.element('#app').should(be.visible)
-    browser.element('#app').should(have.text('Practice Form'))
+    browser.open('/automation-practice-form')
     browser.element('#fixedban').should(be.visible)
     browser.driver.execute_script("$('#fixedban').remove()")
     browser.driver.execute_script("$('footer').remove()")
     browser.driver.execute_script("$('header').remove()")
+    browser.element('#app').should(be.visible)
+    browser.element('#app').should(have.text('Practice Form'))
     browser.element('#firstName').type(text="Sergey")
     browser.element('#lastName').type(text="Labov")
     browser.element('#userEmail').type(text="qaguru@nosuchdomain.net")
