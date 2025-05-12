@@ -1,17 +1,17 @@
 from selene import browser, have, be
 import allure
+from time import sleep
 
-def test_simple(setup_browser):
-    browser.open('https://google.com')
-    pass
 
 @allure.tag("allure test 1")
 @allure.label("owner", "Sergey")
 @allure.feature('Регистрация пользователя')
 @allure.story('Регистрация пользователя с заполнением всех полей')
 @allure.link("https://github.com", name='Testing')
+
 def test_complete_form(setup_browser, file_path):
     browser.open('/automation-practice-form')
+    sleep(2)
     browser.element('#fixedban').should(be.visible)
     browser.driver.execute_script("$('#fixedban').remove()")
     browser.driver.execute_script("$('footer').remove()")
