@@ -1,5 +1,9 @@
 from selene import browser, have, be
 
+def test_simple(setup_browser):
+    browser.open('https://google.com')
+    pass
+
 
 def test_complete_form(setup_browser, file_path):
     browser.open('https://demoqa.com/automation-practice-form')
