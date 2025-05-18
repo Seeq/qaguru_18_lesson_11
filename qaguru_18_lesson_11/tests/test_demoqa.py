@@ -11,7 +11,7 @@ from qaguru_18_lesson_11.pages.registration_page import RegistrationPage
 
 def test_complete_form(setup_browser):
     RegistrationPage()\
-        .open()\
+        .open_url()\
         .preconditions_met()\
         .fill_first_name("Sergey")\
         .fill_last_name("Labov")\
