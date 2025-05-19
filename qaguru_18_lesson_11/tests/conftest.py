@@ -5,7 +5,14 @@ from selenium.webdriver.chrome.options import Options
 from qaguru_18_lesson_11.utils import attach
 from dotenv import load_dotenv
 
+DEFAULT_BROWSER_VERSION = "127.0"
 
+
+def pytest_addoption(parser):
+    parser.addoption(
+        '--browser_version',
+        default='127.0'
+    )
 @pytest.fixture(scope="session", autouse=True)
 def setup_env():
     load_dotenv()
@@ -16,7 +23,9 @@ def file_path():
 
 
 @pytest.fixture(scope='function', autouse=True)
-def setup_browser():
+def setup_browser(request):
+    browser_version = request.config.getoption('--browser_version')
+    browser_version = browser_version if browser_version != "" else DEFAULT_BROWSER_VERSION
     browser.config.base_url = 'https://demoqa.com'
     driver_options = webdriver.ChromeOptions()
     driver_options.page_load_strategy = 'eager'
@@ -27,7 +36,7 @@ def setup_browser():
     options = Options()
     selenoid_capabilities = {
         "browserName": "chrome",
-        "browserVersion": "127.0",
+        "browserVersion": browser_version,
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True
