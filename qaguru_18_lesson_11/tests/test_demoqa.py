@@ -37,4 +37,3 @@ def test_complete_form(setup_browser):
             "meme.png",
             "First street, Second house, Third app.",
             "Rajasthan Jaiselmer")
-
